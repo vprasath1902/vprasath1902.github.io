@@ -1,0 +1,508 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.8">
+    
+    
+      
+        <title>asiq</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.815d1a91.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4cae4f">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="green" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fraud-detection-exploratory-data-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="asiq" class="md-header__button md-logo" aria-label="asiq" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            asiq
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Fraud Detection Exploratory Data Analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="asiq" class="md-nav__button md-logo" aria-label="asiq" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    asiq
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Fraud Detection Exploratory Data Analysis
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Fraud Detection Exploratory Data Analysis
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problem-statement" class="md-nav__link">
+    Problem Statement
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploratory-data-analysis" class="md-nav__link">
+    Exploratory Data Analysis
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploratory Data Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preliminary-data-observation" class="md-nav__link">
+    Preliminary Data Observation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-cleaning" class="md-nav__link">
+    Data Cleaning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-manipulation" class="md-nav__link">
+    Data Manipulation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problem-statement" class="md-nav__link">
+    Problem Statement
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploratory-data-analysis" class="md-nav__link">
+    Exploratory Data Analysis
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploratory Data Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preliminary-data-observation" class="md-nav__link">
+    Preliminary Data Observation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-cleaning" class="md-nav__link">
+    Data Cleaning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-manipulation" class="md-nav__link">
+    Data Manipulation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="fraud-detection-exploratory-data-analysis">Fraud Detection Exploratory Data Analysis</h1>
+<p><img alt="Fraud Detection" src="assets/fraud_detection.jpg" style="height:250px;width:250px" /></p>
+<h2 id="problem-statement">Problem Statement</h2>
+<p>We can consider the bank as a risk-taker in loaning money to a customer. It’s the lender’s job to make sure that the borrower can repay the loan in a timely fashion. If they approved a loan, the lender must be certain the borrower can pay back the loan. If the applicant does not repay the loan, then the bank will suffer a financial loss. This is because the lender has to pay the amount that the borrower owes the lender. This is a good idea because the company wants to understand the driving factors behind the loan default. It can perform a loan loss analysis to identify the causes of bad loans. It’s likely that it can understand the factors which are powerful indicators of default by performing a credit investigation on individual borrowers, analyzing their financial circumstances, and identifying any negative factors.</p>
+<p>You work for a consumer finance company that specializes in lending a variety of loans to urban customers.</p>
+<p>Companies have to decide on loan approval based on the applicants’ profiles.</p>
+<p>Two types of risks are associated with the bank’s decision:</p>
+<p>A loss of business from the company that would otherwise have been awarded the loan;</p>
+<p>Loss of reputation for the bank if the applicant cannot be persuaded to repay the loan.</p>
+<p>He/she will probably default on their loan if they don’t pay it off, so it’s in their best interest to give it a go first.</p>
+<p>The goal of the EDA was to visualize the loan attributes and consumer attributes that affect loan default.</p>
+<p>A hypothesis test is used to discover trends, patterns, or to check assumptions with the help of statistical summaries and graphical representations.</p>
+<p>If a person applies for a loan, there are two types of decisions that the company could take.</p>
+<p>Loan accepted: a. if the company approves the loan, there are three scenarios described below: a. Fully paid: the applicant has fully paid the loan (the principal and the interest rate) b. Current: the applicant is paying the instalments. c. Charged-off: Applicant does not have enough funds available to pay the instalments on time.</p>
+<p>Loan rejected: The company has rejected the loan (because the candidate does not meet their requirements, etc.).</p>
+<h2 id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<h3 id="preliminary-data-observation">Preliminary Data Observation</h3>
+<p>After we load the cvs file into a dataframe, the file constains 39717 rows and 111 columns.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The file constains </span><span class="si">{}</span><span class="s1"> rows and </span><span class="si">{}</span><span class="s1"> columns&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">loan_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">loan_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">The</span> <span class="n">file</span> <span class="n">constains</span> <span class="mi">39717</span> <span class="n">rows</span> <span class="ow">and</span> <span class="mi">111</span> <span class="n">columns</span>
+</code></pre></div></p>
+<p>The columns have the following data type as shown below.  We need to evaluate the 24 object columns as they are in the form of string and category. We confirm our observation by running, "loan_df.info()" function.  By setting verbose to True and show_counts to True, we also display the discrepancy between the total number of entries and missing data.  Then, we execute "loan_df.describe" to display descriptive statistic summary of count, mean, std, min, and max.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dtypes: float64(74), int64(13), object(24)
+</code></pre></div></p>
+<p>For columns in question, we want to verify their categories and unique values. For example, there are two terms in this dataset: 36 and 60 months.<br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>loan_df[&quot;term&quot;].value_counts()
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a> 36 months    29096
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a> 60 months    10621
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Name: term, dtype: int64
+</code></pre></div>
+So far, we use basic functions such as .shape, .info(), .describe(), .value_counts, and .head() to help us see the data better.  Next, we want to determine whether the data contains any NULL. We can execute the function .isnull().sum() on an individual column or on an entire dataframe. In this example, we run it against emp_title.  As stated above, the file contains 39717 rows.  emp_title only has 2459 entries.  That means, it has a lot of missing data which we will need to decide later on whether to drop the entire column or imputate it with common statistical methods such as median.  In this case, emp_title does not add value to our exploratory data analysis.  Therefore, it is on of the columns among many that we will drop using loan_df.drop() function later on.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>loan_df[&quot;emp_title&quot;].isnull().sum()
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>2459
+</code></pre></div></p>
+<h3 id="data-cleaning">Data Cleaning</h3>
+<p>When we execute dataframe.info() above, we observe there are 54 columns without values.  In that case, we need to drop them all. </p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>loan_df = loan_df.drop(columns=[&#39;mths_since_last_major_derog&#39;,&#39;annual_inc_joint&#39;,&#39;dti_joint&#39;,&#39;verification_status_joint&#39;,&#39;tot_coll_amt&#39;,&#39;tot_cur_bal&#39;,&#39;open_acc_6m&#39;,&#39;open_il_6m&#39;,&#39;open_il_12m&#39;,&#39;open_il_24m&#39;,&#39;mths_since_rcnt_il&#39;,&#39;total_bal_il&#39;,&#39;il_util&#39;,&#39;open_rv_12m&#39;,&#39;open_rv_24m&#39;,&#39;max_bal_bc&#39;,&#39;all_util&#39;,&#39;total_rev_hi_lim&#39;,&#39;inq_fi&#39;,&#39;total_cu_tl&#39;,&#39;inq_last_12m&#39;,&#39;acc_open_past_24mths&#39;,&#39;avg_cur_bal&#39;,&#39;bc_open_to_buy&#39;,&#39;bc_util&#39;,&#39;mo_sin_old_il_acct&#39;,&#39;mo_sin_old_rev_tl_op&#39;,&#39;mo_sin_rcnt_rev_tl_op&#39;,&#39;mo_sin_rcnt_tl&#39;,&#39;mort_acc&#39;,&#39;mths_since_recent_bc&#39;,&#39;mths_since_recent_bc_dlq&#39;,&#39;mths_since_recent_inq&#39;,&#39;mths_since_recent_revol_delinq&#39;,&#39;num_accts_ever_120_pd&#39;,&#39;num_actv_bc_tl&#39;,&#39;num_actv_rev_tl&#39;,&#39;num_bc_sats&#39;,&#39;num_bc_tl&#39;,&#39;num_il_tl&#39;,&#39;num_op_rev_tl&#39;,&#39;num_rev_accts&#39;,&#39;num_rev_tl_bal_gt_0&#39;,&#39;num_sats&#39;,&#39;num_tl_120dpd_2m&#39;,&#39;num_tl_30dpd&#39;,&#39;num_tl_90g_dpd_24m&#39;,&#39;num_tl_op_past_12m&#39;,&#39;pct_tl_nvr_dlq&#39;,&#39;percent_bc_gt_75&#39;,&#39;tot_hi_cred_lim&#39;,&#39;total_bal_ex_mort&#39;,&#39;total_bc_limit&#39;,&#39;total_il_high_credit_limit&#39;])
+</code></pre></div>
+Now, we end up with fewer columns to work with. Earlier, we had 111 columns.  Now, we only have 49 columns left. We're making progress. Let's see what else we can do to clean up this data.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>print(&#39;The file constains {} rows and {} columns&#39;.format(loan_df.shape[0],loan_df.shape[1]))
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>The file constains 39717 rows and 49 columns
+</code></pre></div>
+Next, we drop all columns that are not useful for our analysis. 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>loan_df = loan_df.drop(columns=[&#39;emp_title&#39;, &#39;pymnt_plan&#39;, &#39;url&#39;])
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>loan_df.shape
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>(39717, 46)
+</code></pre></div></p>
+<h3 id="data-manipulation">Data Manipulation</h3>
+<p>Our next step is to set the index.  We use id as it is unique.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>loan_df = loan_df.set_index([&quot;id&quot;])
+</code></pre></div>
+As part of data manipulation, we need to convert datatype and replace certain characters in order for us to perform arthmetic on the columns.  See example below:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>loan_df.loan_amnt = loan_df.loan_amnt.astype(&quot;float64&quot;)
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>loan_df.int_rate = loan_df.int_rate.apply(lambda x: x.replace(&quot;%&quot;,&quot;&quot;))
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>loan_df.revol_util = loan_df.revol_util.apply(lambda x:  &quot;%&quot; if pd.isnull(x) else x )
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>loan_df.revol_util = loan_df.revol_util.apply(lambda x:  x.replace(&quot;%&quot;,&quot;&quot;) ) 
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>loan_df[&#39;revol_util&#39;] = pd.to_numeric(loan_df[&#39;revol_util&#39;], errors=&#39;coerce&#39;)
+</code></pre></div>
+Now, let's look at object datatype. We need to convert them to string. Here's an example of how to do that.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>loan_df[&#39;grade&#39;] = pd.Series(loan_df[&#39;grade&#39;], dtype=&quot;string&quot;)
+</code></pre></div>
+We touch upon missing data briefly before. Let's see what options we have with them. Run the following command to see sum of missing data for each column. That's quite a number of them.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>loan_df.isnull().sum()
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>member_id                      0
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>loan_amnt                      0
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>funded_amnt                    0
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>funded_amnt_inv                0
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>term                           0
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>int_rate                       0
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>installment                    0
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>grade                          0
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>sub_grade                      0
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>emp_length                  1075
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>home_ownership                 0
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>annual_inc                     0
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>verification_status            0
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>issue_d                        0
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>loan_status                    0
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>desc                       12940
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>purpose                        0
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>title                         11
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>zip_code                       0
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>addr_state                     0
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>dti                            0
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>delinq_2yrs                    0
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>earliest_cr_line               0
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>inq_last_6mths                 0
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>mths_since_last_delinq     25682
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>mths_since_last_record     36931
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>open_acc                       0
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>pub_rec                        0
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>revol_bal                      0
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>revol_util                    50
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>total_acc                      0
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>out_prncp                      0
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>out_prncp_inv                  0
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>total_pymnt                    0
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>total_pymnt_inv                0
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>total_rec_prncp                0
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>total_rec_int                  0
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>total_rec_late_fee             0
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>recoveries                     0
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>collection_recovery_fee        0
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>last_pymnt_d                  71
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>last_pymnt_amnt                0
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>next_pymnt_d               38577
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>last_credit_pull_d             2
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>pub_rec_bankruptcies         697
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>dtype: int64
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>​
+</code></pre></div>
+If they don't add value to our analysis, let's drop them.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      
+    
+  </body>
+</html>
