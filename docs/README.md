@@ -1,6 +1,6 @@
 # Fraud Detection Exploratory Data Analysis
 
-![Fraud Detection](docs/assets/fraud_detection.jpg){: style="height:250px;width:500px" .center}
+![Fraud Detection](assets/fraud_detection.jpg){: style="height:250px;width:500px" .center}
 
 ## Problem Statement
 
@@ -152,6 +152,6 @@ Let's do a 2D plot to show loan status using loan_amnt vs last_pymnt_amnt. The l
 sns.FacetGrid(loan_df, hue = 'loan_status', size = 5).map(plt.scatter, 'loan_amnt', 'last_pymnt_amnt').add_legend();
 ```
 
-![Loan Amount vs Loan Payment Amount](docs/assets/loan_payment.png){: style="height:350px;width:350px"}
+![Loan Amount vs Loan Payment Amount](assets/loan_payment.png){: style="height:350px;width:350px"}
 
 Let's see how interest rate impact loan payments.

@@ -1,6 +1,6 @@
 # Lending Club Data Analysis
 
-![](docs/assets/eda.jpeg)
+![](assets/eda.jpeg)
 
 ## Problem Statement
 
@@ -160,7 +160,7 @@ loan_df["loan_default"] = loan_df["loan_status"].apply(lambda x: 0 if x == "Full
 ### Handling Outliers
 Before we perform any kind of analysis, we must get rid of outliers first. Try not to get rid of too much data. Use boxplot and histogram to visualize the appropriate cutoff point.
 
-![](docs/assets/histogram.png) ![](docs/assets/boxplot.png)
+![](assets/histogram.png) ![](assets/boxplot.png)
 
 Once we complete data cleansing, data manipulation, data imputation, and handling of outliers, we can proceed to Data Analysis next.
 
@@ -170,7 +170,7 @@ Univariate analysis refers to a type of data analysis that looks at data in one 
 
 We try to find the strongest predictos for all categorical variables compared to the target variable (loan_default). As stated above, we label Fully Paid as 0 and Charged Off (Default) as 1.
 
-![](docs/assets/default.png)
+![](assets/default.png)
 
 We want to find the strongest predictors for the 14.5% Default. Want to focuse on:
 
@@ -178,7 +178,7 @@ We want to find the strongest predictors for the 14.5% Default. Want to focuse o
 'term','grade','sub_grade','emp_length','home_ownership','verification_status','purpose','zip_code','addr_state','issue_d','issue_month','issue_year'
 ```
 
-![](docs/assets/univariables.png)
+![](assets/univariables.png)
 
 As depicted above, zip_code, addr_state, sub_grade, grade, issue_d are the top five univariables to focus on. For the purpose of this case study, we ignore PII data.
 
@@ -192,28 +192,28 @@ Loans approved for the below eight zip codes defaulted 100% of the time. Approvi
 ##### Address State
 Loans approved for the states WY and DC has lesser percentage of loan defaults, 6% and 4% respectively. Approving loan applications for these states has less risk. Also, IA, IN and ME have no loan defaults; although only a small percentage of loan applications are from these states. Approving loan applications from these states also has lesser risk.
 
-![](docs/assets/least_default_state.png)
+![](assets/least_default_state.png)
 
 
 ##### Sub-grade
 Loans approved for the sub-grade levels F5 (49%) and G5 (43%) have very high risk. 49% and 43% of loans for each respective sub-grade defaulted.
 
-![](docs/assets/subgrade.png)
+![](assets/subgrade.png)
 
 ##### Grade
 Loans approved for the grade levels F and G are very high risk as 32% and 33% of loans are defaulted.
 
-![](docs/assets/grade.png)
+![](assets/grade.png)
 
 ##### Issue Date
 Loan ussed in the month of September has a default rate of 16% Issue Date
 
-![](docs/assets/issue_date.png)
+![](assets/issue_date.png)
 
 ##### Home Ownership
 Home Ownership is a strong predictor. Loans approved for the home ownership category OTHER and RENT have high risk of default at 18% and 15% respectively. Loan for MORTGAGE only has default rate of 13%.
 
-![](docs/assets/home_ownership.png)
+![](assets/home_ownership.png)
 
 ##### Purpose
 27% of loans made to small busness defaulted. The second highest default is for renewable engergy.
@@ -225,23 +225,23 @@ purpose
 purpose.sort_values(by="defaulted", ascending=False)
 ```
 
-![](docs/assets/purpose.png)
+![](assets/purpose.png)
 
 ##### Term
 Terms have 36 and 60 months. Out of the two, long-term loan (60 months) has a higher right of default.
 
-![](docs/assets/term.png)
+![](assets/term.png)
 
 
 ##### Verification Status
 Verification status is about the same whether you do it or not. It’s not a strong predictive indicator.
 
-![](docs/assets/verfication_status.png)
+![](assets/verfication_status.png)
 
 ##### Length of Employment
 Length of employment is not a strong indicator either. It varies between 13% and 15% for nine years under observation.
 
-![](docs/assets/emp_length.png)
+![](assets/emp_length.png)
 
 ##### Funded Amount Investor
 Applicants who borrow between 20833 and 25000 encounter the highest default rate of 24.81%
@@ -262,18 +262,18 @@ funded_amnt_inv_bin
 ##### Annual Income
 Loan given to applicant is less than $12,006 annual income has the highest default rate or 25%
 
-![](docs/assets/annual_income.png)
+![](assets/annual_income.png)
 
 
 ##### Interest Rate
 Interest Rate is a strong predictor. Loans approved for the interest greater than 20% is a high risk, as 40% of the loans defaulted.
 
-![](docs/assets/int_rate.png)
+![](assets/int_rate.png)
 
 ##### DTI
 There is a 17% default rate when debt to income ratio is between 21% and 24%.
 
-![](docs/assets/dti.png)
+![](assets/dti.png)
 
 
 #### Bivariate Analysis
@@ -298,18 +298,18 @@ For bivariate analysis, we focus on:
 ##### Grade & Interest Rate
 Grade E & F with interest rate between 19.68 and 22.06 have a default rate of 43% and 41% - respectively. Also, Grade B , C, D, E with interest rate between 5.40 and 7.79 are 100% Fully Paid. Approving loans for the latter categories is good for business.
 
-![](docs/assets/grade_interest.png)
+![](assets/grade_interest.png)
 
 
 ##### Funded Amount by Investor & DTI
 Amount funded by investors between $20833.33 and $25000.00 to applicants with DTI of 5.99 to 8.99 have a 29% default rate.
 
-![](docs/assets/inv_dti.png)
+![](assets/inv_dti.png)
 
 ##### Annual Income and Grade
 Approving G Grade loans to applicants with an annual salary of less than $24166.66 is very high risk as 57% of loans defaulted.
 
-![](docs/assets/income_grade.png)
+![](assets/income_grade.png)
 
 ##### Annual Income and Funded Amount by Investors
 Approving loans with fund between $20833 and $25000 to applicants getting salary between $28200 and $36266 is a high risk as 78% of loans defaulted.
@@ -318,12 +318,12 @@ Approving loans with fund between $20833 and $25000 to applicants getting salary
 loan_df.groupby(['annual_inc_bin','funded_amnt_inv_bin'])["loan_default"].value_counts(1).unstack().sort_values('funded_amnt_inv_bin').plot(kind="barh",figsize=(10.5,25.5), stacked=True);
 ```
 
-![](docs/assets/inc_inv.png)
+![](assets/inc_inv.png)
 
 ##### Funded Amount by Investors, Annual Income & Grade
 If the Loan Amount is greater than $20833 and if the applicants salary is less than $34250, then do not approve the loan with grades C or above.
 
-![](docs/assets/inc_inv_grade.png)
+![](assets/inc_inv_grade.png)
 
 
 ##### Address State and Funded Amount by Investors & Annual Income
@@ -346,7 +346,7 @@ loan_df.groupby(['addr_state','funded_amnt_inv_bin','annual_inc_vsmall_bin'])["l
 ##### Analyze Sub Grade and Annual Income
 When loan Sub-Grade is G3 and the annual income is less than 34250, there is a 100% default
 
-![](docs/assets/subgrade_inc.png)
+![](assets/subgrade_inc.png)
 
 ##### Analyze Annual Income & DTI
 Annual Income with DTI ratio didn't have a big impact in loan default
@@ -355,7 +355,7 @@ Annual Income with DTI ratio didn't have a big impact in loan default
 loan_df.groupby(['annual_inc_bin','dti_bin'])["loan_default"].value_counts(1).unstack().plot(kind="barh",figsize=(10.5,25.5), stacked=True);
 ```
 
-![](docs/assets/annual_inc_dti.png)
+![](assets/annual_inc_dti.png)
 
 ##### Analyze Employee Length and Funded Loan Amount by Investors
 Employee Length with Funded Loan Amount by Investors didn't have a big impact in loan default
@@ -364,14 +364,14 @@ Employee Length with Funded Loan Amount by Investors didn't have a big impact in
 loan_df.groupby(['emp_length','funded_amnt_inv_bin'])["loan_default"].value_counts(1).unstack().plot(kind="barh",figsize=(10.5,25.5), stacked=True);
 ```
 
-![](docs/assets/emp_length_funded_amt.png)
+![](assets/emp_length_funded_amt.png)
 
 ##### Analyze Loan Issued Year and Interest Rate
 
 ```
 loan_df.groupby(['issue_year','int_rate_bin'])["loan_default"].value_counts(1).unstack().plot(kind="barh",figsize=(10.5,25.5), stacked=True);
 ```
-![](docs/assets/issue_year_int_rate.png)
+![](assets/issue_year_int_rate.png)
 
 There are several observations being made from this data point:
 
