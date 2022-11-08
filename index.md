@@ -1,6 +1,6 @@
-# Fraud Detection Exploratory Data Analysis
+# Lending Club Data Analysis
 
-![Fraud Detection](assets/fraud_detection.jpg){: style="height:250px;width:500px" .center}
+![](assets/eda.jpeg)
 
 ## Problem Statement
 
@@ -30,7 +30,7 @@ Loan rejected: The company has rejected the loan (because the candidate does not
 
 ## Exploratory Data Analysis
 
-### Preliminary Data Observation 
+### Preliminary Data Observation
 After we load the cvs file into a dataframe, the file constains 39717 rows and 111 columns.
 ``` py
 print('The file constains {} rows and {} columns'.format(loan_df.shape[0],loan_df.shape[1]))
@@ -56,8 +56,8 @@ loan_df["emp_title"].isnull().sum()
 ```
 
 
-### Data Cleansing
-When we execute dataframe.info() above, we observe there are 54 columns without values.  In that case, we need to drop them all. 
+### Data Cleaning
+When we execute dataframe.info() above, we observe there are 54 columns without values.  In that case, we need to drop them all.
 
 ```
 loan_df = loan_df.drop(columns=['mths_since_last_major_derog','annual_inc_joint','dti_joint','verification_status_joint','tot_coll_amt','tot_cur_bal','open_acc_6m','open_il_6m','open_il_12m','open_il_24m','mths_since_rcnt_il','total_bal_il','il_util','open_rv_12m','open_rv_24m','max_bal_bc','all_util','total_rev_hi_lim','inq_fi','total_cu_tl','inq_last_12m','acc_open_past_24mths','avg_cur_bal','bc_open_to_buy','bc_util','mo_sin_old_il_acct','mo_sin_old_rev_tl_op','mo_sin_rcnt_rev_tl_op','mo_sin_rcnt_tl','mort_acc','mths_since_recent_bc','mths_since_recent_bc_dlq','mths_since_recent_inq','mths_since_recent_revol_delinq','num_accts_ever_120_pd','num_actv_bc_tl','num_actv_rev_tl','num_bc_sats','num_bc_tl','num_il_tl','num_op_rev_tl','num_rev_accts','num_rev_tl_bal_gt_0','num_sats','num_tl_120dpd_2m','num_tl_30dpd','num_tl_90g_dpd_24m','num_tl_op_past_12m','pct_tl_nvr_dlq','percent_bc_gt_75','tot_hi_cred_lim','total_bal_ex_mort','total_bc_limit','total_il_high_credit_limit'])
@@ -67,7 +67,7 @@ Now, we end up with fewer columns to work with. Earlier, we had 111 columns.  No
 print('The file constains {} rows and {} columns'.format(loan_df.shape[0],loan_df.shape[1]))
 The file constains 39717 rows and 49 columns
 ```
-Next, we drop all columns that are not useful for our analysis. 
+Next, we drop all columns that are not useful for our analysis.
 ```
 loan_df = loan_df.drop(columns=['emp_title', 'pymnt_plan', 'url'])
 loan_df.shape
@@ -83,14 +83,14 @@ As part of data manipulation, we need to convert datatype and replace certain ch
 loan_df.loan_amnt = loan_df.loan_amnt.astype("float64")
 loan_df.int_rate = loan_df.int_rate.apply(lambda x: x.replace("%",""))
 loan_df.revol_util = loan_df.revol_util.apply(lambda x:  "%" if pd.isnull(x) else x )
-loan_df.revol_util = loan_df.revol_util.apply(lambda x:  x.replace("%","") ) 
+loan_df.revol_util = loan_df.revol_util.apply(lambda x:  x.replace("%","") )
 loan_df['revol_util'] = pd.to_numeric(loan_df['revol_util'], errors='coerce')
 ```
-Now, let's look at the object datatype. We need to convert them to string. Here's an example of how to do that.
+Now, let's look at object datatype. We need to convert them to string. Here's an example of how to do that.
 ```
 loan_df['grade'] = pd.Series(loan_df['grade'], dtype="string")
 ```
-We touch upon missing data briefly before. Let's see what options we have with them. Run the following command to see sum of missing data for each column. That's quite a lot ber of them. If they don't add value to our analysis, let's drop them. 
+We touch upon missing data briefly before. Let's see what options we have with them. Run the following command to see sum of missing data for each column. That's quite a number of them.
 ```
 loan_df.isnull().sum()
 member_id                      0
@@ -141,17 +141,18 @@ pub_rec_bankruptcies         697
 dtype: int64
 ​
 ```
-The following date columns need specialist handling. We prepend "01-" before we can convert to datetime. Once the dtype is in datetime, we can parse out month and year.
+The following date columns need specialist handling. We prepend “01-“ before we can convert to datetime. Once the dtype is in datetime, we can parse out month and year.
 
 ### Data Imputation
-We imputate categorical data that has missing values using mode.  For missing numerical data, we use mean. If there are outliers, it's best to use median for numerical data. This will exclude the outliers. Below are examples for both scenarios. 
+We imputate categorical data that has missing values using mode. For missing numerical data, we use mean. If there are outliers, it’s best to use median for numerical data. This will exclude the outliers. Below are examples for both scenarios.
 
 ```
 loan_df["emp_length"].fillna(loan_df["emp_length"].mode()[0], inplace=True)
 loan_df.pub_rec_bankruptcies.median()
 ```
 
-We try determine if an applicant will default or not. loan_status column is our target variable which has three values: Fully Paid, Charged Off, and Current.  We can drop Current.  However, we need to convert the former two into 1 and 0 as machine can only understand binary. We must do this first even though we're not training machine learning model at this time. 
+We try determine if an applicant will default or not. loan_status column is our target variable which has three values: Fully Paid, Charged Off, and Current. We can drop Current. However, we need to convert the former two into 1 and 0 as machine can only understand binary. We must do this first even though we’re not training machine learning model at this time.
+
 ```
 loan_df["loan_default"] = loan_df["loan_status"].apply(lambda x: 0 if x == "Fully Paid" else 1)
 ```
@@ -159,10 +160,7 @@ loan_df["loan_default"] = loan_df["loan_status"].apply(lambda x: 0 if x == "Full
 ### Handling Outliers
 Before we perform any kind of analysis, we must get rid of outliers first. Try not to get rid of too much data. Use boxplot and histogram to visualize the appropriate cutoff point.
 
-| Histogram                                         | Boxplot                                   |
-|---------------------------------------------------|-------------------------------------------|
-| ![Histogram](assets/histogram.png){: style="height:300px;width:300px";center} | ![Boxplot](assets/boxplot.png){: style="height:300px;width:300px" .center}
-| Right skewed - cutoff around 35000                | Cutoff around 27000                       |
+![](assets/histogram.png) ![](assets/boxplot.png)
 
 Once we complete data cleansing, data manipulation, data imputation, and handling of outliers, we can proceed to Data Analysis next.
 
@@ -170,50 +168,56 @@ Once we complete data cleansing, data manipulation, data imputation, and handlin
 #### Univariate Analysis
 Univariate analysis refers to a type of data analysis that looks at data in one variable. So, uni refers to “one”. It does not deal with causes or relationships (unlike regression) and its major purpose is to describe, summarize, and find patterns in the data. In univariate analysis, a variable is just a condition or subset that your data falls into. This is a concept that was developed by the National Weather Service. It provides a single number that represents how likely a particular storm is to occur in any given day, week, month, or year.
 
-We try to find the strongest predictos for all categorical variables compared to the target variable (loan_default). As stated above, we label Fully Paid as 0 and Charged Off (Default) as 1. 
+We try to find the strongest predictos for all categorical variables compared to the target variable (loan_default). As stated above, we label Fully Paid as 0 and Charged Off (Default) as 1.
 
-![Loan Default Ratio](assets/default.png){: style="height:300px;width:300px"}
+![](assets/default.png)
 
 We want to find the strongest predictors for the 14.5% Default. Want to focuse on:
+
 ```
 'term','grade','sub_grade','emp_length','home_ownership','verification_status','purpose','zip_code','addr_state','issue_d','issue_month','issue_year'
 ```
-![Univariables](assets/univariables.png){: style="height:300px;width:300px"}
+
+![](assets/univariables.png)
 
 As depicted above, zip_code, addr_state, sub_grade, grade, issue_d are the top five univariables to focus on. For the purpose of this case study, we ignore PII data.
 
 ##### Zip Code
 Loans approved for the below eight zip codes defaulted 100% of the time. Approving loan applications for these zip codes is a huge risk.
 
-['094xx', '373xx', '385xx', '669xx', '689xx', '833xx', '999xx','998xx']
+```
+[‘094xx’, ‘373xx’, ‘385xx’, ‘669xx’, ‘689xx’, ‘833xx’, ‘999xx’,’998xx’]
+```
 
 ##### Address State
-Loans approved for the states WY and DC has lesser percentage of loan defaults, 6% and 4% respectively. Approving loan applications for these states has less risk. Also, IA, IN and ME have no loan defaults; although only a small percentage of loan applications are from these states. Approving loan applications from these states also has lesser risk.   
-![Least Default State](assets/least_default_state.png){: style="height:300px;width:300px"}                           
+Loans approved for the states WY and DC has lesser percentage of loan defaults, 6% and 4% respectively. Approving loan applications for these states has less risk. Also, IA, IN and ME have no loan defaults; although only a small percentage of loan applications are from these states. Approving loan applications from these states also has lesser risk.
+
+![](assets/least_default_state.png)
+
 
 ##### Sub-grade
 Loans approved for the sub-grade levels F5 (49%) and G5 (43%) have very high risk. 49% and 43% of loans for each respective sub-grade defaulted.
 
-   ![Sub-grad](assets/subgrade.png){: style="height:300px;width:450px"}       ![Sub-grad](assets/subgrade_chart.png){: style="height:150px;width:150px"}   
-
+![](assets/subgrade.png)
 
 ##### Grade
 Loans approved for the grade levels F and G are very high risk as 32% and 33% of loans are defaulted.
 
-![Sub-grad](assets/grade.png){: style="height:300px;width:300px"}
-
+![](assets/grade.png)
 
 ##### Issue Date
-Loan ussed in the month of September has a default rate of 16%
-![Issue Date](assets/issue_date.png){: style="height:300px;width:300"}
+Loan ussed in the month of September has a default rate of 16% Issue Date
+
+![](assets/issue_date.png)
 
 ##### Home Ownership
 Home Ownership is a strong predictor. Loans approved for the home ownership category OTHER and RENT have high risk of default at 18% and 15% respectively. Loan for MORTGAGE only has default rate of 13%.
 
-![Home Ownership](assets/home_ownership.png){: style="height:200px;width:200"}
+![](assets/home_ownership.png)
 
 ##### Purpose
 27% of loans made to small busness defaulted. The second highest default is for renewable engergy.
+
 ```
 purpose = round(loan_df.groupby('purpose')["loan_default"].value_counts(1).unstack() *100, 2)
 purpose.columns=["fully_paid","defaulted"]
@@ -221,22 +225,23 @@ purpose
 purpose.sort_values(by="defaulted", ascending=False)
 ```
 
-![Purpose](assets/purpose.png){: style="height:400px;width:300"}
+![](assets/purpose.png)
 
 ##### Term
-Terms have 36 and 60 months.  Out of the two, long-term loan (60 months) has a higher right of default.
+Terms have 36 and 60 months. Out of the two, long-term loan (60 months) has a higher right of default.
 
-![Term](assets/term.png){: style="height:150px;width:150"}
+![](assets/term.png)
+
 
 ##### Verification Status
-Verification status is about the same whether you do it or not.  It's not a strong predictive indicator.
+Verification status is about the same whether you do it or not. It’s not a strong predictive indicator.
 
-![Verification Status](assets/verfication_status.png){: style="height:300px;width:300"}
+![](assets/verfication_status.png)
 
 ##### Length of Employment
 Length of employment is not a strong indicator either. It varies between 13% and 15% for nine years under observation.
 
-![Length of Employment](assets/emp_length.png){: style="height:300px;width:300"}
+![](assets/emp_length.png)
 
 ##### Funded Amount Investor
 Applicants who borrow between 20833 and 25000 encounter the highest default rate of 24.81%
@@ -257,24 +262,24 @@ funded_amnt_inv_bin
 ##### Annual Income
 Loan given to applicant is less than $12,006 annual income has the highest default rate or 25%
 
-![Annual Income](assets/annual_income.png){: style="height:500px;width:500"}
+![](assets/annual_income.png)
+
 
 ##### Interest Rate
 Interest Rate is a strong predictor. Loans approved for the interest greater than 20% is a high risk, as 40% of the loans defaulted.
 
-![Interest Rate](assets/int_rate.png){: style="height:500px;width:500"}
+![](assets/int_rate.png)
 
 ##### DTI
 There is a 17% default rate when debt to income ratio is between 21% and 24%.
 
-![DTI](assets/dti.png){: style="height:500px;width:500"}
-
+![](assets/dti.png)
 
 
 #### Bivariate Analysis
 One of the simplest ways to analyze quantitative data is the bivariate analysis. A correlation study is an empirical research study that examines the relationship between two variables. Statistical analysis is used to determine if there is an association or relationship between the two variables. It determines if there’s a true effect that’s being tested. There are three important factors to consider when conducting a regression analysis. You need to identify the independent variable, the dependent variable, and the model that best fits the data. Bivariate analysis is a simple case of multivariate analysis. In fact, it’s just two variables.
 
-Let's do a 2D plot to show loan status using loan_amnt vs last_pymnt_amnt. The legend on the right depicts the current status. More borrowers fully paid their loan as shown in blue. Charged Off scatters all over the chart as shown in orange. As for borrowers who are current on their payments are linear green line. 
+Let’s do a 2D plot to show loan status using loan_amnt vs last_pymnt_amnt. The legend on the right depicts the current status. More borrowers fully paid their loan as shown in blue. Charged Off scatters all over the chart as shown in orange. As for borrowers who are current on their payments are linear green line.
 
 For bivariate analysis, we focus on:
 
@@ -284,69 +289,107 @@ For bivariate analysis, we focus on:
 - Annual Income and Funded Amount by Investors
 - Funded Amount by Investors, Annual Income & Grade
 - Address State and Funded Amount by Investors & Annual Income
+- Analyze Sub Grade and Annual Income
+- Analyze Annual Income & DTI
+- Analyze Employee Length and Funded Loan Amount by Investors
+- Analyze Loan Issued Year and Interest Rate
+
 
 ##### Grade & Interest Rate
-Grade E & F with interest rate between 19.68 and 22.06 have a default rate of 43% and 41% respectively. Also, Grade B , C, D, E with interest rate between 5.40 and 7.79 are 100% Fully Paid. Approving loans for the latter categories is good for business.
+Grade E & F with interest rate between 19.68 and 22.06 have a default rate of 43% and 41% - respectively. Also, Grade B , C, D, E with interest rate between 5.40 and 7.79 are 100% Fully Paid. Approving loans for the latter categories is good for business.
 
-![DTI](assets/grade_interest.png){: style="height:500px;width:500"}
+![](assets/grade_interest.png)
 
-#####  Funded Amount by Investor & DTI
+
+##### Funded Amount by Investor & DTI
 Amount funded by investors between $20833.33 and $25000.00 to applicants with DTI of 5.99 to 8.99 have a 29% default rate.
 
-![Funded Amount by Investor & DTI](assets/inv_dti.png){: style="height:950px;width:950"}
+![](assets/inv_dti.png)
 
-#####  Annual Income and Grade
+##### Annual Income and Grade
 Approving G Grade loans to applicants with an annual salary of less than $24166.66 is very high risk as 57% of loans defaulted.
 
-![Annual Income and Grade](assets/income_grade.png){: style="height:200px;width:200"}
+![](assets/income_grade.png)
 
-#####  Annual Income and Funded Amount by Investors
+##### Annual Income and Funded Amount by Investors
 Approving loans with fund between $20833 and $25000 to applicants getting salary between $28200 and $36266 is a high risk as 78% of loans defaulted.
 
 ```
 loan_df.groupby(['annual_inc_bin','funded_amnt_inv_bin'])["loan_default"].value_counts(1).unstack().sort_values('funded_amnt_inv_bin').plot(kind="barh",figsize=(10.5,25.5), stacked=True);
 ```
 
-![Annual Income and Funded Amount by Investors](assets/inc_inv.png){: style="height:300px;width:300"}
+![](assets/inc_inv.png)
 
-#####  Funded Amount by Investors, Annual Income & Grade
+##### Funded Amount by Investors, Annual Income & Grade
 If the Loan Amount is greater than $20833 and if the applicants salary is less than $34250, then do not approve the loan with grades C or above.
 
-![Funded Amount by Investors, Annual Income & Grade](assets/inc_inv_grade.png){: style="height:1300px;width:1300"}
+![](assets/inc_inv_grade.png)
 
 
-#####  Address State and Funded Amount by Investors & Annual Income
+##### Address State and Funded Amount by Investors & Annual Income
 Do not approve loans with the following conditions:
 
-    1. When State is WA, loan amount requested is greater than 16666 and annual income is less than 34250
-    2. When State is VA, loan amount requested is greater than 16666 and annual income is less than 34250
-    3. When State is SC, loan amount requested is greater than 16666 and annual income is less than 34250
-    4. When State is NJ, loan amount requested is greater than 16666 and annual income is less than 34250
-    5. When State is NC, loan amount requested is greater than 20833 and annual income is less than 34250
-    6. When State is MD, loan amount requested is greater than 16666 and annual income is less than 34250
-    7. When State is DC, loan amount requested is greater than 12500 and annual income is less than 34250
-    8. When State is AZ, loan amount requested is greater than 16666 and annual income is less than 34250
+- [x] When State is WA, loan amount requested is greater than 16666 and annual income is less than 34250
+- [x] When State is VA, loan amount requested is greater than 16666 and annual income is less than 34250
+- [x] When State is SC, loan amount requested is greater than 16666 and annual income is less than 34250
+- [x] When State is NJ, loan amount requested is greater than 16666 and annual income is less than 34250
+- [x] When State is NC, loan amount requested is greater than 20833 and annual income is less than 34250
+- [x] When State is MD, loan amount requested is greater than 16666 and annual income is less than 34250
+- [x] When State is DC, loan amount requested is greater than 12500 and annual income is less than 34250
+- [x] When State is AZ, loan amount requested is greater than 16666 and annual income is less than 34250
 
 See code below:
 ```
 loan_df.groupby(['addr_state','funded_amnt_inv_bin','annual_inc_vsmall_bin'])["loan_default"].value_counts(1).unstack().plot(kind="barh",figsize=(10.5,150), stacked=True);
 ```
 
-### Recommendations
+##### Analyze Sub Grade and Annual Income
+When loan Sub-Grade is G3 and the annual income is less than 34250, there is a 100% default
+
+![](assets/subgrade_inc.png)
+
+##### Analyze Annual Income & DTI
+Annual Income with DTI ratio didn't have a big impact in loan default
+
+```
+loan_df.groupby(['annual_inc_bin','dti_bin'])["loan_default"].value_counts(1).unstack().plot(kind="barh",figsize=(10.5,25.5), stacked=True);
+```
+
+##### Analyze Employee Length and Funded Loan Amount by Investors
+Employee Length with Funded Loan Amount by Investors didn't have a big impact in loan default
+
+```
+loan_df.groupby(['emp_length','funded_amnt_inv_bin'])["loan_default"].value_counts(1).unstack().plot(kind="barh",figsize=(10.5,25.5), stacked=True);
+```
+
+##### Analyze Loan Issued Year and Interest Rate
+
+```
+loan_df.groupby(['issue_year','int_rate_bin'])["loan_default"].value_counts(1).unstack().plot(kind="barh",figsize=(10.5,25.5), stacked=True);
+```
+
+There are several observations being made from this data point:
+
+1. Except for 2007, the number of defaults grow linearly with respect to increase in the interest rate.
+2. In 2008, a new interest rate maximum is introduced (19.683% ), that year the loan default in this range is 67%
+3. In 2009, a new interest rate maximum is introduced (22.060%), that year the loan default in this range is 55%
+
+So, whenever a new interest rate maximum is introduced, if the approval of the loan applications with this new interest rate is minimal, then the number of loan defaults can be minimized.
+
+## Recommendations
+Based on our analysis, we come up with the following recommendations.  This is based on the limited dataset we have. As new data is gathered, we need to reevaluate the model due to both data and model drifting affect.
 
 - [x] If the Loan Amount is greater than 20833 and the loan grade is C or D or E or F or G and the applicants salary is less than 34250 then do not approve.
-- [x] If the Loan grade is B or C or D or E with Interest rate between 5.403 and 7.797, then approve the loan.
-- [x] Do not approve loans with the following conditions:
 
-    * [ ] When State is WA, loan amount requested is greater than 16666 and annual income is less than 34250
-    * [ ] When State is VA, loan amount requested is greater than 16666 and annual income is less than 34250
-    * [ ] When State is SC, loan amount requested is greater than 16666 and annual income is less than 34250
-    * [ ] When State is NJ, loan amount requested is greater than 16666 and annual income is less than 34250
-    * [ ] When State is NC, loan amount requested is greater than 20833 and annual income is less than 34250
-    * [ ] When State is MD, loan amount requested is greater than 16666 and annual income is less than 34250
-    * [ ] When State is DC, loan amount requested is greater than 12500 and annual income is less than 34250
-    * [ ] When State is AZ, loan amount requested is greater than 16666 and annual income is less than 34250
+- [x] When a new maximum interest rate is introduced in a year, minimize the approval of loan applications in this interest rate so as to minimize the number of loan defaults.
 
-### Conclusion
+- [x] If the Loan grade is B or C or D or E with Interest rate between 5.403 and 7.797, then approve the loan. Do not approve loans with the following conditions:
 
-Making affective decision on when and when not to approve loan applications is paramount to the lending club. We use statistical, univariate, and bivariate analysis to identify strong predictive variables to guide our decision making process. To get there, we need to first load the data, perform exploratory data analysis, clean the data, and handle missing data with imputation or simply drop them if there no or very value from the columns. Next, we perform univariate and bivariate analysis.  This includes performing data visualization to help us quickly see our data. This use case does not factor in local governance which includes personal identified information and demographic data that might be considered as "bias".  
+- [x] Applicants reside in WA, VA, SC, NJ, MD, and AZ who request for loan amount of $16,666 and have annual income of $34,250.
+- [x] Applicants reside in NC who request for loan amount of $20,833 and have annual income of $34,250.
+- [x] Applicants reside in DC who request for loan amount of $12,500 have annual income of $34,250.
+
+## Conclusion
+Making affective decision on when and when not to approve loan applications is paramount to the lending club's survival. We use statistical, univariate, and bivariate analysis to identify strong predictive variables to guide our decision making process. To get there, we need to first load the data, perform exploratory data analysis, clean the data, and handle missing data with imputation or simply drop them if there no or very value from the columns. Next, we perform univariate and bivariate analysis. This includes performing data visualization to help us quickly see our data. At the end, we discover six strong predictive variables that can aid with our loan approval process.  These variables are Funded Loan Amount by Investors, Annual Income, Interest Rate, Grade, Sub-grade, and Issue Date.  Approving loan based on these six data point lessen the risk of being default.
+
+Disclaimer: This use case does not factor in local governance which includes personal identified information and demographic data that might be considered as “bias”. In production environment, we need to remove "bias" data points to avoid unintentional discrimination against any applicants.
