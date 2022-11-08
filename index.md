@@ -355,6 +355,8 @@ Annual Income with DTI ratio didn't have a big impact in loan default
 loan_df.groupby(['annual_inc_bin','dti_bin'])["loan_default"].value_counts(1).unstack().plot(kind="barh",figsize=(10.5,25.5), stacked=True);
 ```
 
+![](assets/annual_inc_dti.png)
+
 ##### Analyze Employee Length and Funded Loan Amount by Investors
 Employee Length with Funded Loan Amount by Investors didn't have a big impact in loan default
 
@@ -362,11 +364,14 @@ Employee Length with Funded Loan Amount by Investors didn't have a big impact in
 loan_df.groupby(['emp_length','funded_amnt_inv_bin'])["loan_default"].value_counts(1).unstack().plot(kind="barh",figsize=(10.5,25.5), stacked=True);
 ```
 
+![](assets/emp_length_funded_amt.png)
+
 ##### Analyze Loan Issued Year and Interest Rate
 
 ```
 loan_df.groupby(['issue_year','int_rate_bin'])["loan_default"].value_counts(1).unstack().plot(kind="barh",figsize=(10.5,25.5), stacked=True);
 ```
+![](assets/issue_year_int_rate.png)
 
 There are several observations being made from this data point:
 
