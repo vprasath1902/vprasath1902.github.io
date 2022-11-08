@@ -1,6 +1,6 @@
 # Fraud Detection Exploratory Data Analysis
 
-![Fraud Detection](assets/fraud_detection.jpg){: style="height:250px;width:500px" .center}
+![Fraud Detection](docs/assets/fraud_detection.jpg){: style="height:250px;width:500px" .center}
 
 ## Problem Statement
 
@@ -30,7 +30,7 @@ Loan rejected: The company has rejected the loan (because the candidate does not
 
 ## Exploratory Data Analysis
 
-### Preliminary Data Observation 
+### Preliminary Data Observation
 After we load the cvs file into a dataframe, the file constains 39717 rows and 111 columns.
 ``` py
 print('The file constains {} rows and {} columns'.format(loan_df.shape[0],loan_df.shape[1]))
@@ -57,7 +57,7 @@ loan_df["emp_title"].isnull().sum()
 
 
 ### Data Cleaning
-When we execute dataframe.info() above, we observe there are 54 columns without values.  In that case, we need to drop them all. 
+When we execute dataframe.info() above, we observe there are 54 columns without values.  In that case, we need to drop them all.
 
 ```
 loan_df = loan_df.drop(columns=['mths_since_last_major_derog','annual_inc_joint','dti_joint','verification_status_joint','tot_coll_amt','tot_cur_bal','open_acc_6m','open_il_6m','open_il_12m','open_il_24m','mths_since_rcnt_il','total_bal_il','il_util','open_rv_12m','open_rv_24m','max_bal_bc','all_util','total_rev_hi_lim','inq_fi','total_cu_tl','inq_last_12m','acc_open_past_24mths','avg_cur_bal','bc_open_to_buy','bc_util','mo_sin_old_il_acct','mo_sin_old_rev_tl_op','mo_sin_rcnt_rev_tl_op','mo_sin_rcnt_tl','mort_acc','mths_since_recent_bc','mths_since_recent_bc_dlq','mths_since_recent_inq','mths_since_recent_revol_delinq','num_accts_ever_120_pd','num_actv_bc_tl','num_actv_rev_tl','num_bc_sats','num_bc_tl','num_il_tl','num_op_rev_tl','num_rev_accts','num_rev_tl_bal_gt_0','num_sats','num_tl_120dpd_2m','num_tl_30dpd','num_tl_90g_dpd_24m','num_tl_op_past_12m','pct_tl_nvr_dlq','percent_bc_gt_75','tot_hi_cred_lim','total_bal_ex_mort','total_bc_limit','total_il_high_credit_limit'])
@@ -67,7 +67,7 @@ Now, we end up with fewer columns to work with. Earlier, we had 111 columns.  No
 print('The file constains {} rows and {} columns'.format(loan_df.shape[0],loan_df.shape[1]))
 The file constains 39717 rows and 49 columns
 ```
-Next, we drop all columns that are not useful for our analysis. 
+Next, we drop all columns that are not useful for our analysis.
 ```
 loan_df = loan_df.drop(columns=['emp_title', 'pymnt_plan', 'url'])
 loan_df.shape
@@ -83,7 +83,7 @@ As part of data manipulation, we need to convert datatype and replace certain ch
 loan_df.loan_amnt = loan_df.loan_amnt.astype("float64")
 loan_df.int_rate = loan_df.int_rate.apply(lambda x: x.replace("%",""))
 loan_df.revol_util = loan_df.revol_util.apply(lambda x:  "%" if pd.isnull(x) else x )
-loan_df.revol_util = loan_df.revol_util.apply(lambda x:  x.replace("%","") ) 
+loan_df.revol_util = loan_df.revol_util.apply(lambda x:  x.replace("%","") )
 loan_df['revol_util'] = pd.to_numeric(loan_df['revol_util'], errors='coerce')
 ```
 Now, let's look at object datatype. We need to convert them to string. Here's an example of how to do that.
@@ -146,15 +146,12 @@ If they don't add value to our analysis, let's drop them.
 ### Bivariate Analysis
 One of the simplest ways to analyze quantitative data is the bivariate analysis. A correlation study is an empirical research study that examines the relationship between two variables. Statistical analysis is used to determine if there is an association or relationship between the two variables. It determines if there’s a true effect that’s being tested. There are three important factors to consider when conducting a regression analysis. You need to identify the independent variable, the dependent variable, and the model that best fits the data. Bivariate analysis is a simple case of multivariate analysis. In fact, it’s just two variables.
 
-Let's do a 2D plot to show loan status using loan_amnt vs last_pymnt_amnt. The legend on the right depicts the current status. More borrowers fully paid their loan as shown in blue. Charged Off scatters all over the chart as shown in orange. As for borrowers who are current on their payments are linear green line. 
+Let's do a 2D plot to show loan status using loan_amnt vs last_pymnt_amnt. The legend on the right depicts the current status. More borrowers fully paid their loan as shown in blue. Charged Off scatters all over the chart as shown in orange. As for borrowers who are current on their payments are linear green line.
 
  ```
 sns.FacetGrid(loan_df, hue = 'loan_status', size = 5).map(plt.scatter, 'loan_amnt', 'last_pymnt_amnt').add_legend();
 ```
 
-![Loan Amount vs Loan Payment Amount](assets/loan_payment.png){: style="height:350px;width:350px"}
+![Loan Amount vs Loan Payment Amount](docs/assets/loan_payment.png){: style="height:350px;width:350px"}
 
 Let's see how interest rate impact loan payments.
-
-
-
