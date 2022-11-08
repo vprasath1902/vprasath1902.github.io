@@ -1,0 +1,14 @@
+site_name: vprasath1902
+theme:
+  name: mkdocs
+  palette:
+    primary: green
+markdown_extensions:
+  - attr_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences

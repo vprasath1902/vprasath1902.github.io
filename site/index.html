@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>vprasath1902</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">vprasath1902</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#lending-club-data-analysis" class="nav-link">Lending Club Data Analysis</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#problem-statement" class="nav-link">Problem Statement</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#exploratory-data-analysis" class="nav-link">Exploratory Data Analysis</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#recommendations" class="nav-link">Recommendations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="lending-club-data-analysis">Lending Club Data Analysis</h1>
+<p><img alt="" class="center" src="assets/fraud_detection.jpg" style="height:250px;width:500px" /></p>
+<h2 id="problem-statement">Problem Statement</h2>
+<p>We can consider the bank as a risk-taker in loaning money to a customer. It’s the lender’s job to make sure that the borrower can repay the loan in a timely fashion. If they approved a loan, the lender must be certain the borrower can pay back the loan. If the applicant does not repay the loan, then the bank will suffer a financial loss. This is because the lender has to pay the amount that the borrower owes the lender. This is a good idea because the company wants to understand the driving factors behind the loan default. It can perform a loan loss analysis to identify the causes of bad loans. It’s likely that it can understand the factors which are powerful indicators of default by performing a credit investigation on individual borrowers, analyzing their financial circumstances, and identifying any negative factors.</p>
+<p>You work for a consumer finance company that specializes in lending a variety of loans to urban customers.</p>
+<p>Companies have to decide on loan approval based on the applicants’ profiles.</p>
+<p>Two types of risks are associated with the bank’s decision:</p>
+<p>A loss of business from the company that would otherwise have been awarded the loan;</p>
+<p>Loss of reputation for the bank if the applicant cannot be persuaded to repay the loan.</p>
+<p>He/she will probably default on their loan if they don’t pay it off, so it’s in their best interest to give it a go first.</p>
+<p>The goal of the EDA was to visualize the loan attributes and consumer attributes that affect loan default.</p>
+<p>A hypothesis test is used to discover trends, patterns, or to check assumptions with the help of statistical summaries and graphical representations.</p>
+<p>If a person applies for a loan, there are two types of decisions that the company could take.</p>
+<p>Loan accepted: a. if the company approves the loan, there are three scenarios described below: a. Fully paid: the applicant has fully paid the loan (the principal and the interest rate) b. Current: the applicant is paying the instalments. c. Charged-off: Applicant does not have enough funds available to pay the instalments on time. Applicant defaults on the loan.</p>
+<p>Loan rejected: The company has rejected the loan (because the candidate does not meet their requirements, etc.).</p>
+<h2 id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<h3 id="preliminary-data-observation">Preliminary Data Observation</h3>
+<p>After we load the cvs file into a dataframe, the file constains 39717 rows and 111 columns.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The file constains </span><span class="si">{}</span><span class="s1"> rows and </span><span class="si">{}</span><span class="s1"> columns&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">loan_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">loan_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">The</span> <span class="n">file</span> <span class="n">constains</span> <span class="mi">39717</span> <span class="n">rows</span> <span class="ow">and</span> <span class="mi">111</span> <span class="n">columns</span>
+</code></pre></div></p>
+<p>The columns have the following data type as shown below.  We need to evaluate the 24 object columns as they are in the form of string and category. We confirm our observation by running, "loan_df.info()" function.  By setting verbose to True and show_counts to True, we also display the discrepancy between the total number of entries and missing data.  Then, we execute "loan_df.describe" to display descriptive statistic summary of count, mean, std, min, and max.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dtypes: float64(74), int64(13), object(24)
+</code></pre></div></p>
+<p>For columns in question, we want to verify their categories and unique values. For example, there are two terms in this dataset: 36 and 60 months.<br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>loan_df[&quot;term&quot;].value_counts()
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a> 36 months    29096
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a> 60 months    10621
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Name: term, dtype: int64
+</code></pre></div>
+So far, we use basic functions such as .shape, .info(), .describe(), .value_counts, and .head() to help us see the data better.  Next, we want to determine whether the data contains any NULL. We can execute the function .isnull().sum() on an individual column or on an entire dataframe. In this example, we run it against emp_title.  As stated above, the file contains 39717 rows.  emp_title only has 2459 entries.  That means, it has a lot of missing data which we will need to decide later on whether to drop the entire column or imputate it with common statistical methods such as median.  In this case, emp_title does not add value to our exploratory data analysis.  Therefore, it is on of the columns among many that we will drop using loan_df.drop() function later on.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>loan_df[&quot;emp_title&quot;].isnull().sum()
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>2459
+</code></pre></div></p>
+<h3 id="data-cleaning">Data Cleaning</h3>
+<p>When we execute dataframe.info() above, we observe there are 54 columns without values.  In that case, we need to drop them all. </p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>loan_df = loan_df.drop(columns=[&#39;mths_since_last_major_derog&#39;,&#39;annual_inc_joint&#39;,&#39;dti_joint&#39;,&#39;verification_status_joint&#39;,&#39;tot_coll_amt&#39;,&#39;tot_cur_bal&#39;,&#39;open_acc_6m&#39;,&#39;open_il_6m&#39;,&#39;open_il_12m&#39;,&#39;open_il_24m&#39;,&#39;mths_since_rcnt_il&#39;,&#39;total_bal_il&#39;,&#39;il_util&#39;,&#39;open_rv_12m&#39;,&#39;open_rv_24m&#39;,&#39;max_bal_bc&#39;,&#39;all_util&#39;,&#39;total_rev_hi_lim&#39;,&#39;inq_fi&#39;,&#39;total_cu_tl&#39;,&#39;inq_last_12m&#39;,&#39;acc_open_past_24mths&#39;,&#39;avg_cur_bal&#39;,&#39;bc_open_to_buy&#39;,&#39;bc_util&#39;,&#39;mo_sin_old_il_acct&#39;,&#39;mo_sin_old_rev_tl_op&#39;,&#39;mo_sin_rcnt_rev_tl_op&#39;,&#39;mo_sin_rcnt_tl&#39;,&#39;mort_acc&#39;,&#39;mths_since_recent_bc&#39;,&#39;mths_since_recent_bc_dlq&#39;,&#39;mths_since_recent_inq&#39;,&#39;mths_since_recent_revol_delinq&#39;,&#39;num_accts_ever_120_pd&#39;,&#39;num_actv_bc_tl&#39;,&#39;num_actv_rev_tl&#39;,&#39;num_bc_sats&#39;,&#39;num_bc_tl&#39;,&#39;num_il_tl&#39;,&#39;num_op_rev_tl&#39;,&#39;num_rev_accts&#39;,&#39;num_rev_tl_bal_gt_0&#39;,&#39;num_sats&#39;,&#39;num_tl_120dpd_2m&#39;,&#39;num_tl_30dpd&#39;,&#39;num_tl_90g_dpd_24m&#39;,&#39;num_tl_op_past_12m&#39;,&#39;pct_tl_nvr_dlq&#39;,&#39;percent_bc_gt_75&#39;,&#39;tot_hi_cred_lim&#39;,&#39;total_bal_ex_mort&#39;,&#39;total_bc_limit&#39;,&#39;total_il_high_credit_limit&#39;])
+</code></pre></div>
+Now, we end up with fewer columns to work with. Earlier, we had 111 columns.  Now, we only have 49 columns left. We're making progress. Let's see what else we can do to clean up this data.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>print(&#39;The file constains {} rows and {} columns&#39;.format(loan_df.shape[0],loan_df.shape[1]))
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>The file constains 39717 rows and 49 columns
+</code></pre></div>
+Next, we drop all columns that are not useful for our analysis. 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>loan_df = loan_df.drop(columns=[&#39;emp_title&#39;, &#39;pymnt_plan&#39;, &#39;url&#39;])
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>loan_df.shape
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>(39717, 46)
+</code></pre></div></p>
+<h3 id="data-manipulation">Data Manipulation</h3>
+<p>Our next step is to set the index.  We use id as it is unique.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>loan_df = loan_df.set_index([&quot;id&quot;])
+</code></pre></div>
+As part of data manipulation, we need to convert datatype and replace certain characters in order for us to perform arthmetic on the columns.  See example below:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>loan_df.loan_amnt = loan_df.loan_amnt.astype(&quot;float64&quot;)
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>loan_df.int_rate = loan_df.int_rate.apply(lambda x: x.replace(&quot;%&quot;,&quot;&quot;))
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>loan_df.revol_util = loan_df.revol_util.apply(lambda x:  &quot;%&quot; if pd.isnull(x) else x )
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>loan_df.revol_util = loan_df.revol_util.apply(lambda x:  x.replace(&quot;%&quot;,&quot;&quot;) ) 
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>loan_df[&#39;revol_util&#39;] = pd.to_numeric(loan_df[&#39;revol_util&#39;], errors=&#39;coerce&#39;)
+</code></pre></div>
+Now, let's look at object datatype. We need to convert them to string. Here's an example of how to do that.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>loan_df[&#39;grade&#39;] = pd.Series(loan_df[&#39;grade&#39;], dtype=&quot;string&quot;)
+</code></pre></div>
+We touch upon missing data briefly before. Let's see what options we have with them. Run the following command to see sum of missing data for each column. That's quite a number of them.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>loan_df.isnull().sum()
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>member_id                      0
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>loan_amnt                      0
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>funded_amnt                    0
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>funded_amnt_inv                0
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>term                           0
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>int_rate                       0
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>installment                    0
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>grade                          0
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>sub_grade                      0
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>emp_length                  1075
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>home_ownership                 0
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>annual_inc                     0
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>verification_status            0
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>issue_d                        0
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>loan_status                    0
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>desc                       12940
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>purpose                        0
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>title                         11
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>zip_code                       0
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>addr_state                     0
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>dti                            0
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>delinq_2yrs                    0
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>earliest_cr_line               0
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>inq_last_6mths                 0
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>mths_since_last_delinq     25682
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>mths_since_last_record     36931
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>open_acc                       0
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>pub_rec                        0
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>revol_bal                      0
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>revol_util                    50
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>total_acc                      0
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>out_prncp                      0
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>out_prncp_inv                  0
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>total_pymnt                    0
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>total_pymnt_inv                0
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>total_rec_prncp                0
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>total_rec_int                  0
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>total_rec_late_fee             0
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>recoveries                     0
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>collection_recovery_fee        0
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>last_pymnt_d                  71
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>last_pymnt_amnt                0
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>next_pymnt_d               38577
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>last_credit_pull_d             2
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>pub_rec_bankruptcies         697
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>dtype: int64
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>​
+</code></pre></div>
+The following date columns need specialist handling. We prepend “01-“ before we can convert to datetime. Once the dtype is in datetime, we can parse out month and year.</p>
+<h3 id="data-imputation">Data Imputation</h3>
+<p>We imputate categorical data that has missing values using mode. For missing numerical data, we use mean. If there are outliers, it’s best to use median for numerical data. This will exclude the outliers. Below are examples for both scenarios.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>loan_df[&quot;emp_length&quot;].fillna(loan_df[&quot;emp_length&quot;].mode()[0], inplace=True)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>loan_df.pub_rec_bankruptcies.median()
+</code></pre></div>
+<p>We try determine if an applicant will default or not. loan_status column is our target variable which has three values: Fully Paid, Charged Off, and Current. We can drop Current. However, we need to convert the former two into 1 and 0 as machine can only understand binary. We must do this first even though we’re not training machine learning model at this time.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>loan_df[&quot;loan_default&quot;] = loan_df[&quot;loan_status&quot;].apply(lambda x: 0 if x == &quot;Fully Paid&quot; else 1)
+</code></pre></div>
+<h3 id="handling-outliers">Handling Outliers</h3>
+<p>Before we perform any kind of analysis, we must get rid of outliers first. Try not to get rid of too much data. Use boxplot and histogram to visualize the appropriate cutoff point.</p>
+<p><img alt="" class="center" src="assets/histogram.png" style="height:250px;width:250px" /> <img alt="" class="center" src="assets/boxplot.png" style="height:250px;width:250px" /></p>
+<p>Once we complete data cleansing, data manipulation, data imputation, and handling of outliers, we can proceed to Data Analysis next.</p>
+<h3 id="data-analysis">Data Analysis</h3>
+<h4 id="univariate-analysis">Univariate Analysis</h4>
+<p>Univariate analysis refers to a type of data analysis that looks at data in one variable. So, uni refers to “one”. It does not deal with causes or relationships (unlike regression) and its major purpose is to describe, summarize, and find patterns in the data. In univariate analysis, a variable is just a condition or subset that your data falls into. This is a concept that was developed by the National Weather Service. It provides a single number that represents how likely a particular storm is to occur in any given day, week, month, or year.</p>
+<p>We try to find the strongest predictos for all categorical variables compared to the target variable (loan_default). As stated above, we label Fully Paid as 0 and Charged Off (Default) as 1.</p>
+<p><img alt="" class="center" src="assets/default.png" style="height:250px;width:250px" /></p>
+<p>We want to find the strongest predictors for the 14.5% Default. Want to focuse on:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>&#39;term&#39;,&#39;grade&#39;,&#39;sub_grade&#39;,&#39;emp_length&#39;,&#39;home_ownership&#39;,&#39;verification_status&#39;,&#39;purpose&#39;,&#39;zip_code&#39;,&#39;addr_state&#39;,&#39;issue_d&#39;,&#39;issue_month&#39;,&#39;issue_year&#39;
+</code></pre></div>
+<p><img alt="" class="center" src="assets/univariables.png" style="height:350px;width:250px" /></p>
+<p>As depicted above, zip_code, addr_state, sub_grade, grade, issue_d are the top five univariables to focus on. For the purpose of this case study, we ignore PII data.</p>
+<h5 id="zip-code">Zip Code</h5>
+<p>Loans approved for the below eight zip codes defaulted 100% of the time. Approving loan applications for these zip codes is a huge risk.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>[‘094xx’, ‘373xx’, ‘385xx’, ‘669xx’, ‘689xx’, ‘833xx’, ‘999xx’,’998xx’]
+</code></pre></div>
+<h5 id="address-state">Address State</h5>
+<p>Loans approved for the states WY and DC has lesser percentage of loan defaults, 6% and 4% respectively. Approving loan applications for these states has less risk. Also, IA, IN and ME have no loan defaults; although only a small percentage of loan applications are from these states. Approving loan applications from these states also has lesser risk.</p>
+<p><img alt="" class="center" src="assets/least_default_state.png" style="height:200px;width:200px" /></p>
+<h5 id="sub-grade">Sub-grade</h5>
+<p>Loans approved for the sub-grade levels F5 (49%) and G5 (43%) have very high risk. 49% and 43% of loans for each respective sub-grade defaulted.</p>
+<p><img alt="" class="center" src="assets/subgrade.png" style="height:300px;width:300px" /></p>
+<h5 id="grade">Grade</h5>
+<p>Loans approved for the grade levels F and G are very high risk as 32% and 33% of loans are defaulted.</p>
+<p><img alt="" class="center" src="assets/grade.png" style="height:300px;width:300px" /></p>
+<h5 id="issue-date">Issue Date</h5>
+<p>Loan ussed in the month of September has a default rate of 16% Issue Date</p>
+<p><img alt="" class="center" src="assets/issue_date.png" style="height:300px;width:300px" /></p>
+<h5 id="home-ownership">Home Ownership</h5>
+<p>Home Ownership is a strong predictor. Loans approved for the home ownership category OTHER and RENT have high risk of default at 18% and 15% respectively. Loan for MORTGAGE only has default rate of 13%.</p>
+<p><img alt="" class="center" src="assets/home_ownership.png" style="height:300px;width:300px" /></p>
+<h5 id="purpose">Purpose</h5>
+<p>27% of loans made to small busness defaulted. The second highest default is for renewable engergy.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>purpose = round(loan_df.groupby(&#39;purpose&#39;)[&quot;loan_default&quot;].value_counts(1).unstack() *100, 2)
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>purpose.columns=[&quot;fully_paid&quot;,&quot;defaulted&quot;]
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>purpose
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>purpose.sort_values(by=&quot;defaulted&quot;, ascending=False)
+</code></pre></div>
+<p><img alt="" class="center" src="assets/purpose.png" style="height:300px;width:300px" /></p>
+<h5 id="term">Term</h5>
+<p>Terms have 36 and 60 months. Out of the two, long-term loan (60 months) has a higher right of default.</p>
+<p><img alt="" class="center" src="assets/term.png" style="height:150px;width:150px" /></p>
+<h5 id="verification-status">Verification Status</h5>
+<p>Verification status is about the same whether you do it or not. It’s not a strong predictive indicator.</p>
+<p><img alt="" class="center" src="assets/verfication_status.png" style="height:350px;width:350px" /></p>
+<h5 id="length-of-employment">Length of Employment</h5>
+<p>Length of employment is not a strong indicator either. It varies between 13% and 15% for nine years under observation.</p>
+<p><img alt="" class="center" src="assets/emp_length.png" style="height:350px;width:350px" /></p>
+<h5 id="funded-amount-investor">Funded Amount Investor</h5>
+<p>Applicants who borrow between 20833 and 25000 encounter the highest default rate of 24.81%</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>print(round(loan_df.groupby(&#39;funded_amnt_inv_bin&#39;)[&quot;loan_default&quot;].value_counts(1).unstack()*100,2))
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>loan_default                0      1
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>funded_amnt_inv_bin                 
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>(-25.0, 4166.667]       85.01  14.99
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>(4166.667, 8333.333]    86.82  13.18
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>(8333.333, 12500.0]     87.08  12.92
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>(12500.0, 16666.667]    84.16  15.84
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>(16666.667, 20833.333]  82.12  17.88
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>(20833.333, 25000.0]    75.19  24.81
+</code></pre></div>
+<h5 id="annual-income">Annual Income</h5>
+<p>Loan given to applicant is less than $12,006 annual income has the highest default rate or 25%</p>
+<p><img alt="" class="center" src="assets/annual_income.png" style="height:350px;width:350px" /></p>
+<h5 id="interest-rate">Interest Rate</h5>
+<p>Interest Rate is a strong predictor. Loans approved for the interest greater than 20% is a high risk, as 40% of the loans defaulted.</p>
+<p><img alt="" class="center" src="assets/int_rate.png" style="height:350px;width:350px" /></p>
+<h5 id="dti">DTI</h5>
+<p>There is a 17% default rate when debt to income ratio is between 21% and 24%.</p>
+<p><img alt="" class="center" src="assets/dti.png" style="height:350px;width:350px" /></p>
+<h4 id="bivariate-analysis">Bivariate Analysis</h4>
+<p>One of the simplest ways to analyze quantitative data is the bivariate analysis. A correlation study is an empirical research study that examines the relationship between two variables. Statistical analysis is used to determine if there is an association or relationship between the two variables. It determines if there’s a true effect that’s being tested. There are three important factors to consider when conducting a regression analysis. You need to identify the independent variable, the dependent variable, and the model that best fits the data. Bivariate analysis is a simple case of multivariate analysis. In fact, it’s just two variables.</p>
+<p>Let’s do a 2D plot to show loan status using loan_amnt vs last_pymnt_amnt. The legend on the right depicts the current status. More borrowers fully paid their loan as shown in blue. Charged Off scatters all over the chart as shown in orange. As for borrowers who are current on their payments are linear green line.</p>
+<p>For bivariate analysis, we focus on:</p>
+<ul>
+<li>Grade &amp; Interest Rate</li>
+<li>Funded Amount by Investor &amp; DTI</li>
+<li>Annual Income and Grade</li>
+<li>Annual Income and Funded Amount by Investors</li>
+<li>Funded Amount by Investors, Annual Income &amp; Grade</li>
+<li>Address State and Funded Amount by Investors &amp; Annual Income</li>
+<li>Analyze Sub Grade and Annual Income</li>
+<li>Analyze Annual Income &amp; DTI </li>
+<li>Analyze Employee Length and Funded Loan Amount by Investors </li>
+<li>Analyze Loan Issued Year and Interest Rate</li>
+</ul>
+<h5 id="grade-interest-rate">Grade &amp; Interest Rate</h5>
+<p>Grade E &amp; F with interest rate between 19.68 and 22.06 have a default rate of 43% and 41% - respectively. Also, Grade B , C, D, E with interest rate between 5.40 and 7.79 are 100% Fully Paid. Approving loans for the latter categories is good for business.</p>
+<p><img alt="" class="center" src="assets/grade_interest.png" style="height:350px;width:450px" /></p>
+<h5 id="funded-amount-by-investor-dti">Funded Amount by Investor &amp; DTI</h5>
+<p>Amount funded by investors between $20833.33 and $25000.00 to applicants with DTI of 5.99 to 8.99 have a 29% default rate.</p>
+<p><img alt="" class="center" src="assets/inv_dti.png" style="height:950px;width:750px" /></p>
+<h5 id="annual-income-and-grade">Annual Income and Grade</h5>
+<p>Approving G Grade loans to applicants with an annual salary of less than $24166.66 is very high risk as 57% of loans defaulted.</p>
+<p><img alt="" class="center" src="assets/income_grade.png" style="height:150px;width:250px" /></p>
+<h5 id="annual-income-and-funded-amount-by-investors">Annual Income and Funded Amount by Investors</h5>
+<p>Approving loans with fund between $20833 and $25000 to applicants getting salary between $28200 and $36266 is a high risk as 78% of loans defaulted.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>loan_df.groupby([&#39;annual_inc_bin&#39;,&#39;funded_amnt_inv_bin&#39;])[&quot;loan_default&quot;].value_counts(1).unstack().sort_values(&#39;funded_amnt_inv_bin&#39;).plot(kind=&quot;barh&quot;,figsize=(10.5,25.5), stacked=True);
+</code></pre></div>
+<p><img alt="" class="center" src="assets/inc_inv.png" style="height:150px;width:350px" /></p>
+<h5 id="funded-amount-by-investors-annual-income-grade">Funded Amount by Investors, Annual Income &amp; Grade</h5>
+<p>If the Loan Amount is greater than $20833 and if the applicants salary is less than $34250, then do not approve the loan with grades C or above.</p>
+<p><img alt="" class="center" src="assets/inc_inv_grade.png" style="height:850px;width:950px" /></p>
+<h5 id="address-state-and-funded-amount-by-investors-annual-income">Address State and Funded Amount by Investors &amp; Annual Income</h5>
+<p>Do not approve loans with the following conditions:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> When State is WA, loan amount requested is greater than 16666 and annual income is less than 34250</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> When State is VA, loan amount requested is greater than 16666 and annual income is less than 34250</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> When State is SC, loan amount requested is greater than 16666 and annual income is less than 34250</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> When State is NJ, loan amount requested is greater than 16666 and annual income is less than 34250</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> When State is NC, loan amount requested is greater than 20833 and annual income is less than 34250</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> When State is MD, loan amount requested is greater than 16666 and annual income is less than 34250</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> When State is DC, loan amount requested is greater than 12500 and annual income is less than 34250</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> When State is AZ, loan amount requested is greater than 16666 and annual income is less than 34250</li>
+</ul>
+<p>See code below:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>loan_df.groupby([&#39;addr_state&#39;,&#39;funded_amnt_inv_bin&#39;,&#39;annual_inc_vsmall_bin&#39;])[&quot;loan_default&quot;].value_counts(1).unstack().plot(kind=&quot;barh&quot;,figsize=(10.5,150), stacked=True);
+</code></pre></div></p>
+<h5 id="analyze-sub-grade-and-annual-income">Analyze Sub Grade and Annual Income</h5>
+<p>When loan Sub-Grade is G3 and the annual income is less than 34250, there is a 100% default</p>
+<p><img alt="" class="center" src="assets/subgrade_inc.png" style="height:1550px;width:550px" /></p>
+<h5 id="analyze-annual-income-dti">Analyze Annual Income &amp; DTI</h5>
+<p>Annual Income with DTI ratio didn't have a big impact in loan default</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>loan_df.groupby([&#39;annual_inc_bin&#39;,&#39;dti_bin&#39;])[&quot;loan_default&quot;].value_counts(1).unstack().plot(kind=&quot;barh&quot;,figsize=(10.5,25.5), stacked=True);
+</code></pre></div>
+<h5 id="analyze-employee-length-and-funded-loan-amount-by-investors">Analyze Employee Length and Funded Loan Amount by Investors</h5>
+<p>Employee Length with Funded Loan Amount by Investors didn't have a big impact in loan default</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>loan_df.groupby([&#39;emp_length&#39;,&#39;funded_amnt_inv_bin&#39;])[&quot;loan_default&quot;].value_counts(1).unstack().plot(kind=&quot;barh&quot;,figsize=(10.5,25.5), stacked=True);
+</code></pre></div>
+<h5 id="analyze-loan-issued-year-and-interest-rate">Analyze Loan Issued Year and Interest Rate</h5>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>loan_df.groupby([&#39;issue_year&#39;,&#39;int_rate_bin&#39;])[&quot;loan_default&quot;].value_counts(1).unstack().plot(kind=&quot;barh&quot;,figsize=(10.5,25.5), stacked=True);
+</code></pre></div>
+<p>There are several observations being made from this data point:</p>
+<ol>
+<li>Except for 2007, the number of defaults grow linearly with respect to increase in the interest rate.</li>
+<li>In 2008, a new interest rate maximum is introduced (19.683% ), that year the loan default in this range is 67%</li>
+<li>In 2009, a new interest rate maximum is introduced (22.060%), that year the loan default in this range is 55%</li>
+</ol>
+<p>So, whenever a new interest rate maximum is introduced, if the approval of the loan applications with this new interest rate is minimal, then the number of loan defaults can be minimized.</p>
+<h2 id="recommendations">Recommendations</h2>
+<p>Based on our analysis, we come up with the following recommendations.  This is based on the limited dataset we have. As new data is gathered, we need to reevaluate the model due to both data and model drifting affect.</p>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> If the Loan Amount is greater than 20833 and the loan grade is C or D or E or F or G and the applicants salary is less than 34250 then do not approve.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> When a new maximum interest rate is introduced in a year, minimize the approval of loan applications in this interest rate so as to minimize the number of loan defaults.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> If the Loan grade is B or C or D or E with Interest rate between 5.403 and 7.797, then approve the loan. Do not approve loans with the following conditions:</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Applicants reside in WA, VA, SC, NJ, MD, and AZ who request for loan amount of $16,666 and have annual income of $34,250.</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Applicants reside in NC who request for loan amount of $20,833 and have annual income of $34,250.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Applicants reside in DC who request for loan amount of $12,500 have annual income of $34,250. </li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Making affective decision on when and when not to approve loan applications is paramount to the lending club's survival. We use statistical, univariate, and bivariate analysis to identify strong predictive variables to guide our decision making process. To get there, we need to first load the data, perform exploratory data analysis, clean the data, and handle missing data with imputation or simply drop them if there no or very value from the columns. Next, we perform univariate and bivariate analysis. This includes performing data visualization to help us quickly see our data. At the end, we discover six strong predictive variables that can aid with our loan approval process.  These variables are Funded Loan Amount by Investors, Annual Income, Interest Rate, Grade, Sub-grade, and Issue Date.  Approving loan based on these six data point lessen the risk of being default. </p>
+<p>Disclaimer: This use case does not factor in local governance which includes personal identified information and demographic data that might be considered as “bias”. In production environment, we need to remove "bias" data points to avoid unintentional discrimination against any applicants.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.4.2
+Build Date UTC : 2022-11-08 03:18:52.047791+00:00
+-->
